@@ -13,9 +13,17 @@ engine = create_async_engine(
     echo=settings.DEBUG,
     future=True,
     pool_pre_ping=True,
-    pool_size=10,
-    max_overflow=20,
-    connect_args={"statement_cache_size": 0},
+    pool_size=5,
+    max_overflow=10,
+    pool_recycle=3600,
+    connect_args={
+        "statement_cache_size": 0,
+        "prepared_statement_cache_size": 0,
+        "server_settings": {
+            "application_name": "inventory_app",
+            "jit": "off",
+        }
+    },
 )
 
 # Create async session factory

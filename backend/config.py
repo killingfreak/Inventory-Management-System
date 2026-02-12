@@ -24,5 +24,13 @@ class Settings(BaseSettings):
         env_file = ".env"
         case_sensitive = True
 
+    def get_database_url(self) -> str:
+        """Get properly formatted database URL for asyncpg"""
+        url = self.DATABASE_URL
+        # If URL doesn't have asyncpg, add it
+        if url.startswith("postgresql://") and "+asyncpg" not in url:
+            url = url.replace("postgresql://", "postgresql+asyncpg://")
+        # If URL already has postgresql+asyncpg, keep it as is
+        return url
 
 settings = Settings()
