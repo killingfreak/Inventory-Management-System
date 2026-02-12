@@ -41,7 +41,7 @@ app.add_middleware(
         "http://localhost:5173",
         "http://localhost:3000",
         # Add your Vercel deployment URL here
-        "https://*.vercel.app",
+        "https://inventory-management-system-puce-two.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],

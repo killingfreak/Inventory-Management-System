@@ -5,6 +5,8 @@ from config import settings
 # Convert postgresql:// to postgresql+asyncpg:// for async support
 DATABASE_URL = settings.DATABASE_URL
 
+print(f"🚀 Final DATABASE_URL in use: {DATABASE_URL}")
+
 # Create async engine
 engine = create_async_engine(
     DATABASE_URL,
@@ -13,6 +15,7 @@ engine = create_async_engine(
     pool_pre_ping=True,
     pool_size=10,
     max_overflow=20,
+    connect_args={"statement_cache_size": 0},
 )
 
 # Create async session factory
